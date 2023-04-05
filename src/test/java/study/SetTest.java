@@ -41,7 +41,8 @@ public class SetTest {
     @ParameterizedTest(name = "값: {0}")
     @ValueSource(ints = {1,2,3})
     void contains(int number) {
-        assertThat(numbers.contains(number)).isTrue();
+        assertThat(numbers).contains(number);
+//        assertThat(numbers.contains(number)).isTrue();
     }
 
     @DisplayName("값이 set에 존재하는지 테스트")
