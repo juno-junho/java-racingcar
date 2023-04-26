@@ -2,16 +2,12 @@ package study.racingcar.view;
 
 import study.racingcar.domain.Car;
 import study.racingcar.domain.Winners;
-import study.racingcar.rule.OutputViewRule;
 
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final OutputViewRule rule;
-
-    static {
-        rule = new OutputViewRule();
-    }
+    private static final String CAR_SHAPE = "-";
+    private static final String WINNER_DELIMITER = ",";
 
     public static void printCarNameSign() {
         System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분).");
@@ -35,7 +31,7 @@ public class OutputView {
 
     private static String carStatus(Car car) {
         final int position = car.getPosition();
-        return rule.getCarShape().repeat(position);
+        return CAR_SHAPE.repeat(position);
     }
     public static void printGameResult(Winners winners) {
         String message = generateWinnerOutputMessage(winners);
@@ -45,6 +41,6 @@ public class OutputView {
         return winners.getWinners()
                 .stream()
                 .map(Car::getCarName)
-                .collect(Collectors.joining(rule.getWinnerDelimiter()));
+                .collect(Collectors.joining(WINNER_DELIMITER));
     }
 }
