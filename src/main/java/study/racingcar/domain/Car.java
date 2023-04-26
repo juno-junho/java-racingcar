@@ -1,6 +1,6 @@
 package study.racingcar.domain;
 
-import study.racingcar.rule.DomainRule;
+import study.racingcar.strategy.NumberGenerator;
 
 public class Car {
     private final Position position;
@@ -16,13 +16,13 @@ public class Car {
         this.position = new Position(position);
     }
 
-    public void move() {
-        position.increase();
+    public static boolean isMovable(NumberGenerator numberGenerator) {
+        int value = numberGenerator.generate();
+        return value >= numberGenerator.MOVABLE_LOWER_BOUND;
     }
 
-    public static boolean isMovable(DomainRule rule) {
-        int value = rule.generate();
-        return value >= DomainRule.MOVABLE_LOWER_BOUND;
+    public void move() {
+        position.increase();
     }
 
     public String getCarName() {
@@ -31,5 +31,9 @@ public class Car {
 
     public int getPosition() {
         return Integer.parseInt(position.toString());
+    }
+
+    public boolean isWinner(int maxPosition) {
+        return position.isSame(maxPosition);
     }
 }
